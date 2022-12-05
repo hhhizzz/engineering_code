@@ -3,4 +3,32 @@ project(engineering_code)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(engineering_code src/main.cpp)
+enable_testing()
+
+add_subdirectory("third_party/googletest")
+
+FILE(GLOB TEST_SRCS "src/*_test.cc")
+
+foreach(testSrc ${TEST_SRCS})
+  get_filename_component(testName ${testSrc} NAME_WE)
+  add_executable(${testName} ${testSrc})
+
+  target_link_libraries(${testName} gmock gtest gtest_main)
+
+  string(REGEX MATCH "[0-9]+"
+    testNumber ${testName})
+
+  add_test(NAME ${testNumber}
+    COMMAND ${testName}
+  )
+endforeach(testSrc)
+
+# add_executable(engineering_code_tests "")
+
+# target_sources(engineering_code_tests
+# PRIVATE ${TestFiles}
+# )
+
+# target_link_libraries(engineering_code_tests gmock gtest gtest_main)
+
+# add_test(NAME "engineering_code_tests" COMMAND "engineering_code_tests")
