@@ -15,7 +15,7 @@ foreach(testSrc ${TEST_SRCS})
 
   target_link_libraries(${testName} gmock gtest gtest_main)
 
-  string(REGEX MATCH "[0-9]+"
+  string(REGEX MATCH "(offer_)?[0-9]+"
     testNumber ${testName})
 
   add_test(NAME ${testNumber}
