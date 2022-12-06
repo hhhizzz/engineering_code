@@ -19,7 +19,6 @@ class CQueue {
   }
 
   int topStack2() {
-    // If the stack2 has elements, just use it to return.
     auto result = stack2_.top();
     stack2_.pop();
     return result;
