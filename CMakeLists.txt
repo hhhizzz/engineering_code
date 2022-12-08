@@ -22,13 +22,3 @@ foreach(testSrc ${TEST_SRCS})
     COMMAND ${testName}
   )
 endforeach(testSrc)
-
-# add_executable(engineering_code_tests "")
-
-# target_sources(engineering_code_tests
-# PRIVATE ${TestFiles}
-# )
-
-# target_link_libraries(engineering_code_tests gmock gtest gtest_main)
-
-# add_test(NAME "engineering_code_tests" COMMAND "engineering_code_tests")
