@@ -9,7 +9,7 @@
 
 void testPattern(const std::vector<std::pair<std::string, int>>& input,
                  const std::vector<int>& expected) {
-  MinStack* min_stack;
+  MinStack* min_stack = nullptr;
 
   for (int i = 0; i < input.size(); i++) {
     auto operation = input[i].first;

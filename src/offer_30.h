@@ -10,7 +10,7 @@ class MinStack {
   std::stack<int> min_{};
 
  public:
-  MinStack() {}
+  MinStack() = default;
 
   void push(int x) {
     storage_.push(x);

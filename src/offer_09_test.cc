@@ -17,7 +17,7 @@ void testPattern(std::vector<string>& operations, std::vector<int> numbers) {
       c_queue->appendTail(numbers[i]);
     } else if (operations[i] == "deleteHead") {
       auto actual = c_queue->deleteHead();
-      if (expected_queue.size() > 0) {
+      if (!expected_queue.empty()) {
         auto front = expected_queue.front();
         ASSERT_EQ(actual, front);
         expected_queue.pop();

@@ -5,9 +5,9 @@
 struct ListNode {
   int val;
   ListNode* next;
-  ListNode(int x) : val(x), next(nullptr) {}
+  explicit ListNode(int x) : val(x) { this->next = nullptr; }
 
-  static ListNode* Build(std::vector<int>& input) {
+  static ListNode* Build(const std::vector<int>& input) {
     auto pre_head = new ListNode(-1);
     auto pre = pre_head;
     for (auto item : input) {

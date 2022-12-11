@@ -6,14 +6,14 @@
 #include "gtest/gtest.h"
 
 void testPattern(std::vector<int>& nums, int target,
-                 std::vector<int>& expected) {
+                 const std::vector<int>& expected) {
   Solution s;
-  auto result = s.twoSum(nums, target);
+  auto actual = s.twoSum(nums, target);
 
-  sort(result.begin(), result.end());
+  std::sort(actual.begin(), actual.end());
 
   // Expect equality.
-  EXPECT_EQ(result, expected);
+  EXPECT_EQ(actual, expected);
 }
 
 TEST(Error, UnknownBehavior) {

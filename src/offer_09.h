@@ -25,7 +25,7 @@ class CQueue {
   }
 
  public:
-  CQueue() {}
+  CQueue() = default;
 
   void appendTail(int value) { stack1_.push(value); }
 
