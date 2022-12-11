@@ -1,7 +1,7 @@
 #include "offer_06.h"
 
 #include "gtest/gtest.h"
-#include "utility/List_node.h"
+#include "utility/list_node.h"
 
 void testPattern(std::vector<int>& input_vector) {
   Solution s;

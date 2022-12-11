@@ -1,7 +1,7 @@
 #include <stack>
 #include <vector>
 
-#include "utility/List_node.h"
+#include "utility/list_node.h"
 
 using std::stack;
 using std::vector;
@@ -21,7 +21,7 @@ class Solution {
 
     vector<int> result;
     result.reserve(s.size());
-    while (s.size() != 0) {
+    while (!s.empty()) {
       result.push_back(s.top());
       s.pop();
     }
