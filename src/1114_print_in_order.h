@@ -1,8 +1,10 @@
+#include <condition_variable>
 #include <functional>
 #include <mutex>
 
 using std::function;
 
+namespace method1 {
 class Foo {
  private:
   std::mutex m1_;
@@ -32,3 +34,40 @@ class Foo {
     printThird();
   }
 };
+}  // namespace method1
+
+namespace method2 {
+class Foo {
+ private:
+  std::condition_variable cv_;
+  std::mutex mu_;
+  int k_ = 0;
+
+ public:
+  Foo() {}
+
+  void first(function<void()> printFirst) {
+    // printFirst() outputs "first". Do not change or remove this line.
+    printFirst();
+    k_ = 1;
+    cv_.notify_all();
+  }
+
+  void second(function<void()> printSecond) {
+    std::unique_lock<std::mutex> lock(mu_);
+    cv_.wait(lock, [this]() { return k_ == 1; });
+    // printSecond() outputs "second". Do not change or remove this line.
+    printSecond();
+    k_ = 2;
+    cv_.notify_all();
+  }
+
+  void third(function<void()> printThird) {
+    std::unique_lock<std::mutex> lock(mu_);
+    cv_.wait(lock, [this]() { return k_ == 2; });
+    // printThird() outputs "third". Do not change or remove this line.
+    printThird();
+  }
+};
+
+}  // namespace method2

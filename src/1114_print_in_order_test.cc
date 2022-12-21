@@ -12,14 +12,15 @@ void PrintFirst() { output.append("first"); }
 void PrintSecond() { output.append("second"); }
 void PrintThird() { output.append("third"); }
 
-TEST(Examples, MultipleThread) {
+template <typename T>
+void testPattern() {
   for (int i = 0; i < 1000; i++) {
-    Foo foo;
+    T foo;
     ResetOutput();
 
-    auto first_callable = [](Foo* foo) { foo->first(PrintFirst); };
-    auto second_callable = [](Foo* foo) { foo->second(PrintSecond); };
-    auto third_callable = [](Foo* foo) { foo->third(PrintThird); };
+    auto first_callable = [](T* foo) { foo->first(PrintFirst); };
+    auto second_callable = [](T* foo) { foo->second(PrintSecond); };
+    auto third_callable = [](T* foo) { foo->third(PrintThird); };
 
     std::thread third_thread(third_callable, &foo);
     std::thread second_thread(second_callable, &foo);
@@ -30,6 +31,11 @@ TEST(Examples, MultipleThread) {
     third_thread.join();
     ASSERT_EQ(output, "firstsecondthird");
   }
+}
+
+TEST(Examples, MultipleThread) {
+  testPattern<method1::Foo>();
+  testPattern<method2::Foo>();
 }
 
 int main(int argc, char** argv) {
