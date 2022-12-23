@@ -15,14 +15,20 @@ TEST(RandomNode, BuildTest) {
   ASSERT_EQ(input, output);
 }
 
-void TestPattern(const std::vector<std::pair<int, int>>& input) {
-  method1::Solution s;
+template <typename S>
+void TestPatternInner(const std::vector<std::pair<int, int>>& input) {
+  S s;
   auto head = Node::BuildNode(input);
 
   auto another_head = s.copyRandomList(head);
   auto output = Node::ToVec(another_head);
 
   ASSERT_EQ(input, output);
+}
+
+void TestPattern(const std::vector<std::pair<int, int>>& input) {
+  TestPatternInner<method1::Solution>(input);
+  TestPatternInner<method2::Solution>(input);
 }
 
 TEST(Examples, Example1) {
