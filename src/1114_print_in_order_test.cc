@@ -34,8 +34,9 @@ void testPattern() {
 }
 
 TEST(Examples, MultipleThread) {
-  testPattern<method1::Foo>();
+  // testPattern<method1::Foo>();
   testPattern<method2::Foo>();
+  // testPattern<method3::Foo>();
 }
 
 int main(int argc, char** argv) {

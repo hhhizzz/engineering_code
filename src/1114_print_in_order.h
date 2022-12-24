@@ -1,5 +1,6 @@
 #include <condition_variable>
 #include <functional>
+#include <future>
 #include <mutex>
 
 using std::function;
@@ -44,7 +45,7 @@ class Foo {
   int k_ = 0;
 
  public:
-  Foo() {}
+  Foo() = default;
 
   void first(function<void()> printFirst) {
     // printFirst() outputs "first". Do not change or remove this line.
@@ -59,7 +60,7 @@ class Foo {
     // printSecond() outputs "second". Do not change or remove this line.
     printSecond();
     k_ = 2;
-    cv_.notify_all();
+    cv_.notify_one();
   }
 
   void third(function<void()> printThird) {
@@ -71,3 +72,32 @@ class Foo {
 };
 
 }  // namespace method2
+
+namespace method3 {
+class Foo {
+ private:
+  std::promise<void> pro1_, pro2_;
+
+ public:
+  Foo() = default;
+
+  void first(function<void()> printFirst) {
+    // printFirst() outputs "first". Do not change or remove this line.
+    printFirst();
+    pro1_.set_value();
+  }
+
+  void second(function<void()> printSecond) {
+    pro1_.get_future().wait();
+    // printSecond() outputs "second". Do not change or remove this line.
+    printSecond();
+    pro2_.set_value();
+  }
+
+  void third(function<void()> printThird) {
+    pro2_.get_future().wait();
+    // printThird() outputs "third". Do not change or remove this line.
+    printThird();
+  }
+};
+}  // namespace method3
