@@ -37,6 +37,8 @@ class Foo {
 };
 }  // namespace method1
 
+// It's not a perfect solution, if the notify is called before the wait, the
+// whole process will be blocked
 namespace method2 {
 class Foo {
  private:
