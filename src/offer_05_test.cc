@@ -1,7 +1,8 @@
 #include "offer_05.h"
 
+#include <string>
+
 #include "gtest/gtest.h"
-#include "string"
 
 void TestPattern(std::string input, std::string expected) {
   Solution s;
