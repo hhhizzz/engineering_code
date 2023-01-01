@@ -14,12 +14,25 @@ foreach(testSrc ${TEST_SRCS})
   get_filename_component(testName ${testSrc} NAME_WE)
   add_executable(${testName} ${testSrc})
 
-  target_link_libraries(${testName} gmock gtest gtest_main)
+  target_link_libraries(${testName} gtest gtest_main)
 
   string(REGEX MATCH "(offer_)?[0-9]+"
     testNumber ${testName})
 
   add_test(NAME ${testNumber}
+    COMMAND ${testName}
+  )
+endforeach(testSrc)
+
+FILE(GLOB TEST_UTILITY "src/utility/*_test.cc")
+
+foreach(testSrc ${TEST_UTILITY})
+  get_filename_component(testName ${testSrc} NAME_WE)
+  add_executable(${testName} ${testSrc})
+
+  target_link_libraries(${testName} gtest gtest_main)
+
+  add_test(NAME ${testName}
     COMMAND ${testName}
   )
 endforeach(testSrc)
