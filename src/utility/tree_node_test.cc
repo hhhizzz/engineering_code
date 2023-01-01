@@ -2,9 +2,9 @@
 
 #include "gtest/gtest.h"
 
-TEST(BuildTree, BuildVector) {
+TEST(BuildTree, FromVector) {
   std::vector<std::optional<int>> input{1, std::nullopt, 3};
-  auto actual = TreeNode::BuildTree(input);
+  auto actual = TreeNode::VecToTree(input);
 
   ASSERT_EQ(actual->val, 1);
   ASSERT_EQ(actual->left, nullptr);
