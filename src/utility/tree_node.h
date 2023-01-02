@@ -41,6 +41,20 @@ struct TreeNode {
 
     return node_vec[0];
   }
+
+  static bool Compare(TreeNode* left, TreeNode* right) {
+    if (left == nullptr && left == right) {
+      return true;
+    }
+    if (left == nullptr || right == nullptr) {
+      return false;
+    }
+    if (left->val != right->val) {
+      return false;
+    }
+    return Compare(left->left, right->left) &&
+           Compare(left->right, right->right);
+  }
 };
 
 #pragma endregion
