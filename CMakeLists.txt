@@ -16,7 +16,7 @@ foreach(testSrc ${TEST_SRCS})
 
   target_link_libraries(${testName} gtest gtest_main)
 
-  string(REGEX MATCH "(offer_)?[0-9]+"
+  string(REGEX MATCH "(offer_)?[0-9_]+"
     testNumber ${testName})
 
   add_test(NAME ${testNumber}
